@@ -14,7 +14,7 @@ import os
 import json
 import shutil
 from dotenv import load_dotenv
-
+import xml.etree.ElementTree as ET
 
 
 # Carrega variáveis do .env
@@ -95,6 +95,7 @@ for setor_nome in os.listdir(entrada_base):
             "usuario": usuario,
             "equipamento": equipamento_nome,
             "fotos": fotos_indexadas
+            
         })
 
 
@@ -124,3 +125,23 @@ with open(os.path.join(saida_base, "inventario.json"), "w", encoding="utf-8") as
     json.dump(inventario, f, ensure_ascii=False, indent=4)
 
 print(f"Inventário criado com sucesso em: {saida_base}")
+
+# Salva o inventário em XML
+# Saves the inventory to an XML file
+root = ET.Element("inventario")
+
+for item in inventario:
+    entry = ET.SubElement(root, "item")
+    ET.SubElement(entry, "setor").text = item["setor"]
+    ET.SubElement(entry, "usuario").text = item["usuario"]
+    ET.SubElement(entry, "equipamento").text = item["equipamento"]
+    fotos_elem = ET.SubElement(entry, "fotos")
+    for foto in item["fotos"]:
+        ET.SubElement(fotos_elem, "foto").text = foto
+
+tree = ET.ElementTree(root)
+xml_path = os.path.join(saida_base, "inventario.xml")
+tree.write(xml_path, encoding="utf-8", xml_declaration=True)
+
+print("Inventário XML criado com sucesso em: {xml_path}".format)
+

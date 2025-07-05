@@ -1,6 +1,7 @@
 # Enviroment variables and configuration files
 # Arquivo de variáveis de ambiente
 .env
+*.xml
 
 # Entrance and exit directories
 # Diretório de entrada (ajuste o nome se necessário)

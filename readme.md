@@ -10,4 +10,4 @@ O script lê uma estrutura de diretório onde cada setor tem subdiretórios para
 e cada diretório de usuário contém um arquivo de texto com o nome do equipamento e fotos JPEG.
 Gera um arquivo JSON de inventário e copia as fotos para um diretório de saída especificado.
 
-by: Flavio Brandão
+>by: Flavio Brandão
